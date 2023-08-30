@@ -1,10 +1,10 @@
 import { Client } from "genius-lyrics";
 
-export const getLyrics = async () => {
+export const getLyrics = async (name) => {
   try {
     const client = new Client();
 
-    const searches = await client.songs.search("illenium");
+    const searches = await client.songs.search(name);
 
     const song = searches[0];
 
@@ -12,7 +12,7 @@ export const getLyrics = async () => {
 
     console.log(song.title);
 
-    return [{ title: song?.title }];
+    return [{ lyrics: lyrics, title: song?.title, artist: song?.artist.name }];
   } catch (error) {
     console.log(error);
   }

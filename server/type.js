@@ -1,9 +1,10 @@
 export const typeDefs = `
     type lyrics {
-        id: ID!,
-        title:String!,
+        lyrics: String!,
+        title: String,
+        artist: String,
     }
 
     type Query {
-        getLyrics: [lyrics],
+        getLyrics(name : String!): [lyrics],
     }`;

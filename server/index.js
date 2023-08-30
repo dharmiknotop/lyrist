@@ -18,8 +18,8 @@ async function startServer() {
     typeDefs,
     resolvers: {
       Query: {
-        getLyrics: () => {
-          return getLyrics();
+        getLyrics: (_, { name }) => {
+          return getLyrics(name);
         },
       },
     },
