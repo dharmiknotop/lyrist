@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 
 import { typeDefs } from "./type.js";
+import { getLyrics } from "./resolver/getClient.js";
 
 async function startServer() {
   const app = express();
@@ -18,7 +19,7 @@ async function startServer() {
     resolvers: {
       Query: {
         getLyrics: () => {
-          return [{ id: 1, title: "something" }];
+          return getLyrics();
         },
       },
     },
