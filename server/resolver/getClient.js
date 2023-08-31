@@ -10,9 +10,7 @@ export const getLyrics = async (name) => {
 
     const lyrics = await song?.lyrics();
 
-    console.log(song.title);
-
-    return [{ lyrics: lyrics, title: song?.title, artist: song?.artist.name }];
+    return { lyrics: lyrics, title: song?.title, artist: song?.artist.name };
   } catch (error) {
     console.log(error);
   }
