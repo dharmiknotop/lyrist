@@ -1,6 +1,6 @@
 export const typeDefs = `
     type lyrics {
-        lyrics: String!,
+        lyrics: String,
         title: String,
         artist: String,
     }

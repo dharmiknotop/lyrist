@@ -1,4 +1,4 @@
-import Lyrics from "../components/Lyrics";
+import Form from "@/components/Form";
 
 export default function Home() {
   return (
@@ -9,7 +9,7 @@ export default function Home() {
         singer
       </h1>
 
-      <Lyrics />
+      <Form />
     </div>
   );
 }

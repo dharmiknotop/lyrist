@@ -1,0 +1,344 @@
+[
+    Song {
+      client: Client {
+        key: undefined,
+        config: {},
+        songs: [SongsClient],
+        artists: [ArtistsClient],
+        api: [ApiClient]
+      },
+      partial: true,
+      title: 'Perfect',
+      fullTitle: 'Perfect by Ed Sheeran',
+      featuredTitle: 'Perfect',
+      id: 2953761,
+      thumbnail: 'https://images.genius.com/e3f8f8e64db64e0f9316365d8d247bf9.300x300x1.jpg',
+      image: 'https://images.genius.com/e3f8f8e64db64e0f9316365d8d247bf9.1000x1000x1.jpg',
+      url: 'https://genius.com/Ed-sheeran-perfect-lyrics',
+      endpoint: '/songs/2953761',
+      artist: Artist {
+        client: [Client],
+        partial: true,
+        name: 'Ed Sheeran',
+        id: 12418,
+        url: 'https://genius.com/artists/Ed-sheeran',
+        thumbnail: 'https://images.genius.com/3ab6a4f22f71e08d2b68987f2e725ca9.1000x750x1.jpg',
+        image: 'https://images.genius.com/e61adb6350f274fda9c4b1fa73939e95.1000x1000x1.jpg',
+        iq: 1334,
+        verified: [Object],
+        socialmedia: [Object],
+        _raw: [Object]
+      },
+      album: undefined,
+      releasedAt: undefined,
+      instrumental: false,
+      _raw: {
+        _type: 'song',
+        annotation_count: 10,
+        api_path: '/songs/2953761',
+        artist_names: 'Ed Sheeran',
+        full_title: 'Perfect by Ed Sheeran',
+        header_image_thumbnail_url: 'https://images.genius.com/e3f8f8e64db64e0f9316365d8d247bf9.300x300x1.jpg',
+        header_image_url: 'https://images.genius.com/e3f8f8e64db64e0f9316365d8d247bf9.1000x1000x1.jpg',
+        id: 2953761,
+        instrumental: false,
+        lyrics_owner_id: 2171344,
+        lyrics_state: 'complete',
+        lyrics_updated_at: 1689607035,
+        path: '/Ed-sheeran-perfect-lyrics',
+        pyongs_count: 265,
+        relationships_index_url: 'https://genius.com/Ed-sheeran-perfect-sample',
+        release_date_components: [Object],
+        release_date_for_display: 'March 3, 2017',
+        release_date_with_abbreviated_month_for_display: 'Mar. 3, 2017',
+        song_art_image_thumbnail_url: 'https://images.genius.com/35fad95b68ee49ae50eb71a918075e75.300x300x1.png',
+        song_art_image_url: 'https://images.genius.com/35fad95b68ee49ae50eb71a918075e75.1000x1000x1.png',
+        stats: [Object],
+        title: 'Perfect',
+        title_with_featured: 'Perfect',
+        updated_by_human_at: 1690350345,
+        url: 'https://genius.com/Ed-sheeran-perfect-lyrics',
+        featured_artists: [],
+        primary_artist: [Object]
+      }
+    },
+    Song {
+      client: Client {
+        key: undefined,
+        config: {},
+        songs: [SongsClient],
+        artists: [ArtistsClient],
+        api: [ApiClient]
+      },
+      partial: true,
+      title: 'Perfect Duet',
+      fullTitle: 'Perfect Duet by Ed Sheeran & Beyoncé',
+      featuredTitle: 'Perfect Duet',
+      id: 3343029,
+      thumbnail: 'https://images.genius.com/071a819f088609ee9d24b2dba4546b23.300x300x1.jpg',
+      image: 'https://images.genius.com/071a819f088609ee9d24b2dba4546b23.1000x1000x1.jpg',
+      url: 'https://genius.com/Ed-sheeran-and-beyonce-perfect-duet-lyrics',
+      endpoint: '/songs/3343029',
+      artist: Artist {
+        client: [Client],
+        partial: true,
+        name: 'Ed Sheeran & Beyoncé',
+        id: 1280523,
+        url: 'https://genius.com/artists/Ed-sheeran-and-beyonce',      
+        thumbnail: 'https://images.genius.com/05eeda5acb2cad15933903b5a4e2aaee.1000x1000x1.jpg',
+        image: 'https://images.genius.com/47ae80f6adda3082182ed162a8980a46.1000x1000x1.jpg',
+        iq: NaN,
+        verified: [Object],
+        socialmedia: [Object],
+        _raw: [Object]
+      },
+      album: undefined,
+      releasedAt: undefined,
+      instrumental: false,
+      _raw: {
+        _type: 'song',
+        annotation_count: 9,
+        api_path: '/songs/3343029',
+        artist_names: 'Ed Sheeran & Beyoncé',
+        full_title: 'Perfect Duet by Ed Sheeran & Beyoncé',
+        header_image_thumbnail_url: 'https://images.genius.com/071a819f088609ee9d24b2dba4546b23.300x300x1.jpg',
+        header_image_url: 'https://images.genius.com/071a819f088609ee9d24b2dba4546b23.1000x1000x1.jpg',
+        id: 3343029,
+        instrumental: false,
+        lyrics_owner_id: 2891574,
+        lyrics_state: 'complete',
+        lyrics_updated_at: 1681259004,
+        path: '/Ed-sheeran-and-beyonce-perfect-duet-lyrics',
+        pyongs_count: 49,
+        relationships_index_url: 'https://genius.com/Ed-sheeran-and-beyonce-perfect-duet-sample',
+        release_date_components: [Object],
+        release_date_for_display: 'December 1, 2017',
+        release_date_with_abbreviated_month_for_display: 'Dec. 1, 2017',
+        song_art_image_thumbnail_url: 'https://images.genius.com/d319bb71af2782d6c654389507f21c31.300x300x1.jpg',
+        song_art_image_url: 'https://images.genius.com/d319bb71af2782d6c654389507f21c31.1000x1000x1.jpg',
+        stats: [Object],
+        title: 'Perfect Duet',
+        title_with_featured: 'Perfect Duet',
+        updated_by_human_at: 1690336178,
+        url: 'https://genius.com/Ed-sheeran-and-beyonce-perfect-duet-lyrics',
+        featured_artists: [],
+        primary_artist: [Object]
+      }
+    },
+    Song {
+      client: Client {
+        key: undefined,
+        config: {},
+        songs: [SongsClient],
+        artists: [ArtistsClient],
+        api: [ApiClient]
+      },
+      partial: true,
+      title: 'Perfect Symphony',
+      fullTitle: 'Perfect Symphony by Ed Sheeran & Andrea Bocelli',    
+      featuredTitle: 'Perfect Symphony',
+      id: 3356202,
+      thumbnail: 'https://images.genius.com/077c401213adacc821aa9bc94bbeddee.300x300x1.jpg',
+      image: 'https://images.genius.com/077c401213adacc821aa9bc94bbeddee.1000x1000x1.jpg',
+      url: 'https://genius.com/Ed-sheeran-and-andrea-bocelli-perfect-symphony-lyrics',
+      endpoint: '/songs/3356202',
+      artist: Artist {
+        client: [Client],
+        partial: true,
+        name: 'Ed Sheeran & Andrea Bocelli',
+        id: 1304926,
+        url: 'https://genius.com/artists/Ed-sheeran-and-andrea-bocelli',
+        thumbnail: 'https://images.genius.com/7812a0d58bf10c151944e74e19d4ce26.600x325x1.jpg',
+        image: 'https://images.genius.com/2b32509a4578f2aabe958c3bc3301342.633x633x1.jpg',
+        iq: NaN,
+        verified: [Object],
+        socialmedia: [Object],
+        _raw: [Object]
+      },
+      album: undefined,
+      releasedAt: undefined,
+      instrumental: false,
+      _raw: {
+        _type: 'song',
+        annotation_count: 6,
+        api_path: '/songs/3356202',
+        artist_names: 'Ed Sheeran & Andrea Bocelli',
+        full_title: 'Perfect Symphony by Ed Sheeran & Andrea Bocelli', 
+        header_image_thumbnail_url: 'https://images.genius.com/077c401213adacc821aa9bc94bbeddee.300x300x1.jpg',
+        header_image_url: 'https://images.genius.com/077c401213adacc821aa9bc94bbeddee.1000x1000x1.jpg',
+        id: 3356202,
+        instrumental: false,
+        lyrics_owner_id: 3499957,
+        lyrics_state: 'complete',
+        lyrics_updated_at: 1604728399,
+        path: '/Ed-sheeran-and-andrea-bocelli-perfect-symphony-lyrics',
+        pyongs_count: 18,
+        relationships_index_url: 'https://genius.com/Ed-sheeran-and-andrea-bocelli-perfect-symphony-sample',
+        release_date_components: [Object],
+        release_date_for_display: 'December 15, 2017',
+        release_date_with_abbreviated_month_for_display: 'Dec. 15, 2017',
+        song_art_image_thumbnail_url: 'https://images.genius.com/077c401213adacc821aa9bc94bbeddee.300x300x1.jpg',
+        song_art_image_url: 'https://images.genius.com/077c401213adacc821aa9bc94bbeddee.1000x1000x1.jpg',
+        stats: [Object],
+        title: 'Perfect Symphony',
+        title_with_featured: 'Perfect Symphony',
+        updated_by_human_at: 1690253659,
+        url: 'https://genius.com/Ed-sheeran-and-andrea-bocelli-perfect-symphony-lyrics',
+        featured_artists: [],
+        primary_artist: [Object]
+      }
+    },
+    Song {
+      client: Client {
+        key: undefined,
+        config: {},
+        songs: [SongsClient],
+        artists: [ArtistsClient],
+        api: [ApiClient]
+      },
+      partial: true,
+      title: 'Perfect Strangers',
+      fullTitle: 'Perfect Strangers by Jonas Blue (Ft. JP Cooper)',    
+      featuredTitle: 'Perfect Strangers (Ft. JP Cooper)',
+      id: 2486576,
+      thumbnail: 'https://images.genius.com/25c450c4f30beaa431fa83a5112d0719.300x300x1.jpg',
+      image: 'https://images.genius.com/25c450c4f30beaa431fa83a5112d0719.1000x1000x1.jpg',
+      url: 'https://genius.com/Jonas-blue-perfect-strangers-lyrics',   
+      endpoint: '/songs/2486576',
+      artist: Artist {
+        client: [Client],
+        partial: true,
+        name: 'Jonas Blue',
+        id: 632979,
+        url: 'https://genius.com/artists/Jonas-blue',
+        thumbnail: 'https://images.genius.com/6bbbcffaf65c9ca78ceb0f792cf88b3a.400x400x1.jpg',
+        image: 'https://images.genius.com/d54fb6c319a92c25f8af56d50b854a7b.400x400x1.jpg',
+        iq: 707,
+        verified: [Object],
+        socialmedia: [Object],
+        _raw: [Object]
+      },
+      album: undefined,
+      releasedAt: undefined,
+      instrumental: false,
+      _raw: {
+        _type: 'song',
+        annotation_count: 5,
+        api_path: '/songs/2486576',
+        artist_names: 'Jonas Blue (Ft. JP Cooper)',
+        full_title: 'Perfect Strangers by Jonas Blue (Ft. JP Cooper)', 
+        header_image_thumbnail_url: 'https://images.genius.com/25c450c4f30beaa431fa83a5112d0719.300x300x1.jpg',
+        header_image_url: 'https://images.genius.com/25c450c4f30beaa431fa83a5112d0719.1000x1000x1.jpg',
+        id: 2486576,
+        instrumental: false,
+        lyrics_owner_id: 104344,
+        lyrics_state: 'complete',
+        lyrics_updated_at: 1541682923,
+        path: '/Jonas-blue-perfect-strangers-lyrics',
+        pyongs_count: 20,
+        relationships_index_url: 'https://genius.com/Jonas-blue-perfect-strangers-sample',
+        release_date_components: [Object],
+        release_date_for_display: 'June 3, 2016',
+        release_date_with_abbreviated_month_for_display: 'Jun. 3, 2016',
+        song_art_image_thumbnail_url: 'https://images.genius.com/cfb99ca150ddfd422b5a8040f5605b89.300x300x1.jpg',
+        song_art_image_url: 'https://images.genius.com/cfb99ca150ddfd422b5a8040f5605b89.1000x1000x1.jpg',
+        stats: [Object],
+        title: 'Perfect Strangers',
+        title_with_featured: 'Perfect Strangers (Ft. JP Cooper)',      
+        updated_by_human_at: 1686081704,
+        url: 'https://genius.com/Jonas-blue-perfect-strangers-lyrics', 
+        featured_artists: [Array],
+        primary_artist: [Object]
+      }
+    },
+    Song {
+      client: Client {
+        key: undefined,
+        config: {},
+        songs: [SongsClient],
+        artists: [ArtistsClient],
+        api: [ApiClient]
+      },
+      partial: true,
+      title: 'Nobody’s Perfect',
+      fullTitle: "Nobody's Perfect by J. Cole (Ft. Missy Elliott)",    
+      featuredTitle: "Nobody's Perfect (Ft. Missy Elliott)",
+      id: 54969,
+      thumbnail: 'https://images.genius.com/ed35ac1342446879899bcee64ce51082.300x280x1.jpg',
+      image: 'https://images.genius.com/ed35ac1342446879899bcee64ce51082.572x533x1.jpg',
+      url: 'https://genius.com/J-cole-nobodys-perfect-lyrics',
+      endpoint: '/songs/54969',
+      artist: Artist {
+        client: [Client],
+        partial: true,
+        name: 'J. Cole',
+        id: 69,
+        url: 'https://genius.com/artists/J-cole',
+        thumbnail: 'https://images.genius.com/b4ced5fc34166c4798ae3a0e23aaa13d.1000x261x1.jpg',
+        image: 'https://images.genius.com/84a98a8d26b13b7311aa2359ebade757.1000x1000x1.jpg',
+        iq: 505,
+        verified: [Object],
+        socialmedia: [Object],
+        _raw: [Object]
+      },
+      album: undefined,
+      releasedAt: undefined,
+      instrumental: false,
+      _raw: {
+        _type: 'song',
+        annotation_count: 28,
+        api_path: '/songs/54969',
+        artist_names: 'J. Cole (Ft. Missy Elliott)',
+        full_title: "Nobody's Perfect by J. Cole (Ft. Missy Elliott)", 
+        header_image_thumbnail_url: 'https://images.genius.com/ed35ac1342446879899bcee64ce51082.300x280x1.jpg',
+        header_image_url: 'https://images.genius.com/ed35ac1342446879899bcee64ce51082.572x533x1.jpg',
+        id: 54969,
+        instrumental: false,
+        lyrics_owner_id: 7,
+        lyrics_state: 'complete',
+        lyrics_updated_at: 1683590460,
+        path: '/J-cole-nobodys-perfect-lyrics',
+        pyongs_count: 76,
+  fect-sample',
+        release_date_components: [Object],
+        release_date_for_display: 'February 7, 2012',
+        release_date_with_abbreviated_month_for_display: 'Feb. 7, 2012',
+  
+        song_art_image_thumbnail_url: 'https://images.genius.com/ed35ac1342446879899bcee64ce51082.300x280x1.jpg',
+        song_art_image_url: 'https://images.genius.com/ed35ac1342446879899bcee64ce51082.572x533x1.jpg',
+        stats: [Object],
+        title: 'Nobody’s Perfect',
+        title_with_featured: "Nobody's Perfect (Ft. Missy Elliott)",    
+        updated_by_human_at: 1683590460,
+        url: 'https://genius.com/J-cole-nobodys-perfect-lyrics',        
+        featured_artists: [Array],
+        primary_artist: [Object]
+      }
+    }
+  ]
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

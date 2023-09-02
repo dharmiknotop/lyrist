@@ -6,7 +6,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 
 import { typeDefs } from "./type.js";
-import { getLyrics } from "./resolver/getClient.js";
+import { getLyrics } from "./resolver/getLyrics.js";
 
 async function startServer() {
   const app = express();

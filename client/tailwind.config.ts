@@ -15,6 +15,6 @@ const config = withMT({
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")({ nocompatible: true })],
 });
 export default config;
