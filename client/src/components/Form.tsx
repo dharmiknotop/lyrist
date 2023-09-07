@@ -1,8 +1,18 @@
 "use client";
 
-import { Input, Button, Spinner } from "@material-tailwind/react";
+import axios, { AxiosResponse } from "axios";
+import { Input, Button } from "@material-tailwind/react";
 import { useState } from "react";
 import Lyrics from "./Lyrics";
+
+import { configKeys } from "@/config/keys";
+
+export interface UserRegistrationModel {
+  email: string;
+  password: string;
+  firstname: string;
+  lastname: string;
+}
 
 const Form = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -22,18 +32,17 @@ const Form = () => {
     try {
       setLoading(true);
 
-      const { data } = await fetch("http://localhost:8000/graphql", {
-        method: "POST",
-        body: JSON.stringify({
+      const { data }: AxiosResponse = await axios.post(
+        `${configKeys.SERVER_URL}/graphql`,
+        {
           query: GET_LYRICS,
           variables: { name },
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => res.json());
+        }
+      );
 
-      setLyrics(data?.getLyrics?.lyrics);
+      console.log(data);
+
+      setLyrics(data?.data?.getLyrics?.lyrics);
 
       setLoading(false);
     } catch (error) {
