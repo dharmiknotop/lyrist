@@ -17,8 +17,6 @@ export interface UserRegistrationModel {
 const Form = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
-  console.log(process.env.NEXT_PUBLIC_SERVER_URL);
-
   const [artist, setArtist] = useState("");
   const [track, setTrack] = useState("");
 
