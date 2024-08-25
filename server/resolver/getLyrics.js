@@ -27,6 +27,7 @@ export const getLyrics = async (name) => {
 
     return { lyrics, title: song?.title, artist: song?.artist.name };
   } catch (error) {
+    console.log("error in api");
     console.log(error);
   }
 };

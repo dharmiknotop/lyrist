@@ -13,31 +13,35 @@ import { typeDefs } from "./type.js";
 import { getLyrics } from "./resolver/getLyrics.js";
 
 async function startServer() {
-  const app = express();
+  try {
+    const app = express();
 
-  app.use(cors());
-  app.use(bodyParser.json());
+    app.use(cors());
+    app.use(bodyParser.json());
 
-  const apolloServer = new ApolloServer({
-    typeDefs,
-    resolvers: {
-      Query: {
-        getLyrics: (_, { name }) => {
-          return getLyrics(name);
+    const apolloServer = new ApolloServer({
+      typeDefs,
+      resolvers: {
+        Query: {
+          getLyrics: (_, { name }) => {
+            return getLyrics(name);
+          },
         },
       },
-    },
-  });
-  await apolloServer.start();
+    });
+    await apolloServer.start();
 
-  app.use("/graphql", expressMiddleware(apolloServer));
+    app.use("/graphql", expressMiddleware(apolloServer));
 
-  const server = app.listen(8000, () => {
-    console.log(
-      `🚀 Server ready at http://localhost:8000${apolloServer.graphqlPath}`
-    );
-  });
-  return server;
+    const server = app.listen(8000, () => {
+      console.log(
+        `🚀 Server ready at http://localhost:8000${apolloServer.graphqlPath}`
+      );
+    });
+    return server;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 startServer();
