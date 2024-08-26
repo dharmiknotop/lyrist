@@ -1,6 +1,5 @@
 import { redis } from "../config/redis.js";
 import { Client } from "genius-lyrics";
-import fetch from "node-fetch";
 
 export const getLyrics = async (name) => {
   try {
