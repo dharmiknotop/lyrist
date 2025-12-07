@@ -3,6 +3,7 @@ export const typeDefs = `
         lyrics: String,
         title: String,
         artist: String,
+        error: String,
     }
 
     type Query {

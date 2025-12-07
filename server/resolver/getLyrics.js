@@ -1,33 +1,41 @@
-import { redis } from "../config/redis.js";
-import { Client } from "genius-lyrics";
+import GeniusService from "../services/GeniusService.js";
+import CacheService from "../services/CacheService.js";
 
 export const getLyrics = async (name) => {
   try {
-    // trying to check if the lyrics were searched before or not for the song name with redis
-
-    let cachedLyrics = await redis.get(name);
+    const cachedLyrics = await CacheService.get(name);
 
     if (cachedLyrics) {
       return { lyrics: cachedLyrics };
     }
 
-    const client = new Client();
+    console.log(`Fetching lyrics from Genius API for: "${name}"`);
 
-    const searches = await client.songs.search(name);
+    const result = await GeniusService.getLyrics(name);
 
-    const song = searches[0];
+    if (result.lyrics) {
+      await CacheService.set(name, result.lyrics);
+    }
 
-    const lyrics = await song?.lyrics();
-
-    // setting the lyrics in the redis so that if user tries to search for a song with the same name
-    // he will get a response way quicker
-
-    await redis.set(name, lyrics);
-    await redis.expire(name, 300); // 5min expiring time
-
-    return { lyrics, title: song?.title, artist: song?.artist.name };
+    return result;
   } catch (error) {
-    console.log("error in api");
-    console.log(error);
+    console.error("getLyrics resolver error:", error.message);
+
+    // Return user-friendly error messages based on error type
+    if (error.message?.includes("No song found")) {
+      return {
+        error: "No lyrics found for this song. Try a different search.",
+      };
+    }
+
+    if (error.message?.includes("timeout")) {
+      return {
+        error: "Request timed out. Please try again.",
+      };
+    }
+
+    return {
+      error: "Failed to fetch lyrics. Please try again later.",
+    };
   }
 };
