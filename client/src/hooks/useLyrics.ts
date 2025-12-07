@@ -8,7 +8,7 @@ interface UseLyricsReturn {
   lyrics: LyricsResponse | null;
   loading: boolean;
   error: string | null;
-  fetchLyrics: (track: string, artist?: string) => Promise<void>;
+  fetchLyrics: (artist: string, title: string) => Promise<void>;
   clearLyrics: () => void;
 }
 
@@ -17,15 +17,14 @@ export const useLyrics = (): UseLyricsReturn => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchLyrics = useCallback(async (track: string, artist?: string) => {
+  const fetchLyrics = useCallback(async (artist: string, title: string) => {
     // Reset state
     setLoading(true);
     setError(null);
     setLyrics(null);
 
     try {
-      const query = LyricsService.buildSearchQuery(track, artist);
-      const result = await LyricsService.fetchLyrics(query);
+      const result = await LyricsService.fetchLyrics(artist, title);
       setLyrics(result);
     } catch (err: any) {
       const errorMessage = getErrorMessage(err);
@@ -51,17 +50,20 @@ export const useLyrics = (): UseLyricsReturn => {
 };
 
 function getErrorMessage(error: any): string {
+  // First, check if it's the actual error message from the API
+  if (error.message) {
+    return error.message;
+  }
+
+  // Then check for Axios-specific errors
   if (error instanceof AxiosError) {
     if (error.code === ERROR_CODES.TIMEOUT) {
       return ERROR_MESSAGES.TIMEOUT;
-    }
-    if (error.response?.data?.errors) {
-      return ERROR_MESSAGES.FETCH_FAILED;
     }
     if (error.code === ERROR_CODES.NETWORK_ERROR) {
       return ERROR_MESSAGES.NETWORK_ERROR;
     }
   }
 
-  return error.message || ERROR_MESSAGES.UNKNOWN_ERROR;
+  return ERROR_MESSAGES.UNKNOWN_ERROR;
 }

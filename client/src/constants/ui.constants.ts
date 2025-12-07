@@ -39,8 +39,8 @@ export const LOADING_MESSAGES = {
 export const PLACEHOLDERS = {
   EMPTY_STATE: "Your lyrics will be shown here...",
   NO_LYRICS_FOUND: "Sorry, no lyrics found",
-  ARTIST_LABEL: "Artist name (optional)",
-  TRACK_LABEL: "Track name",
+  ARTIST_LABEL: "Artist Name",
+  TRACK_LABEL: "Track Name",
 } as const;
 
 /**

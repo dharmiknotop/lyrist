@@ -1,41 +1,33 @@
-import GeniusService from "../services/GeniusService.js";
+import LyricsService from "../services/LyricsService.js";
 import CacheService from "../services/CacheService.js";
 
-export const getLyrics = async (name) => {
+export const getLyrics = async ({ artist, title }) => {
   try {
-    // const cachedLyrics = await CacheService.get(name);
+    console.log(`Fetching lyrics for: "${artist} - ${title}"`);
 
-    // if (cachedLyrics) {
-    //   return { lyrics: cachedLyrics };
-    // }
+    const name = `lyrics_${artist.trim().toLowerCase()}_${title
+      .trim()
+      .toLowerCase()}`;
 
-    console.log(`Fetching lyrics from Genius API for: "${name}"`);
+    const cachedLyrics = await CacheService.get(name);
 
-    const result = await GeniusService.getLyrics(name);
+    if (cachedLyrics) {
+      return { lyrics: cachedLyrics };
+    }
 
-    // if (result.lyrics) {
-    //   await CacheService.set(name, result.lyrics);
-    // }
+    const result = await LyricsService.getLyrics(artist, title);
+
+    if (result.lyrics) {
+      await CacheService.set(name, result.lyrics);
+    }
 
     return result;
   } catch (error) {
     console.error("getLyrics resolver error:", error.message);
 
-    // Return user-friendly error messages based on error type
-    if (error.message?.includes("No song found")) {
-      return {
-        error: "No lyrics found for this song. Try a different search.",
-      };
-    }
-
-    if (error.message?.includes("timeout")) {
-      return {
-        error: "Request timed out. Please try again.",
-      };
-    }
-
+    // Return the actual error message from the service
     return {
-      error: "Failed to fetch lyrics. Please try again later.",
+      error: error.message || "Failed to fetch lyrics. Please try again later.",
     };
   }
 };

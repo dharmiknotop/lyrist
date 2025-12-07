@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "@apollo/server": "^4.9.2",
+    "@brandond/findthelyrics": "^2.0.5",
     "@upstash/redis": "^0.0.0-ci.e1d39d33",
     "axios": "^1.6.2",
     "body-parser": "^1.20.2",
@@ -21,7 +22,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "genius-lyrics": "^4.4.3",
-    "graphql": "^16.8.0"
+    "graphql": "^16.8.0",
+    "music-lyrics": "^2.0.2"
   }
 }

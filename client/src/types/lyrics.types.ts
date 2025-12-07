@@ -34,6 +34,7 @@ export interface LyricsProps {
   title?: string;
   artist?: string;
   loadingMessage?: string;
+  error?: string | null;
 }
 
 /**

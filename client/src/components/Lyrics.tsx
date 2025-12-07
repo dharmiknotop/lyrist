@@ -9,6 +9,7 @@ export const Lyrics = ({
   title,
   artist,
   loadingMessage,
+  error,
 }: LyricsProps) => {
   return (
     <div className="lyrics relative mt-6 h-[400px] max-h-[400px] w-full overflow-y-scroll rounded-md border border-zinc-600 bg-zinc-800/60 p-4 text-sm text-white shadow-xl scrollbar-thin scrollbar-track-transparent scrollbar-thumb-cyan-600 scrollbar-thumb-rounded md:h-[250px] md:max-h-[250px]">
@@ -27,6 +28,15 @@ export const Lyrics = ({
         </div>
       )}
 
+      {/* Error State */}
+      {!loading && error && (
+        <div className="flex h-full flex-col items-center justify-center">
+          <div className="rounded-md border border-red-500 bg-red-500/10 p-4 text-center">
+            <p className="text-sm text-red-400">{error}</p>
+          </div>
+        </div>
+      )}
+
       {/* Lyrics Content */}
       {!loading && lyrics && (
         <div className="h-full">
@@ -34,9 +44,13 @@ export const Lyrics = ({
           {(title || artist) && (
             <div className="sticky top-0 z-10 mb-4 border-b border-zinc-600 bg-zinc-800/95 pb-3 backdrop-blur-sm">
               {title && (
-                <h3 className="text-lg font-semibold text-cyan-400">{title}</h3>
+                <h3 className="text-lg font-semibold text-cyan-400 capitalize">
+                  {title}
+                </h3>
               )}
-              {artist && <p className="text-sm text-gray-400">by {artist}</p>}
+              {artist && (
+                <p className="text-sm text-gray-400 capitalize">by {artist}</p>
+              )}
             </div>
           )}
 
@@ -48,7 +62,7 @@ export const Lyrics = ({
       )}
 
       {/* Empty State */}
-      {!loading && !lyrics && (
+      {!loading && !lyrics && !error && (
         <div className="flex h-full items-center justify-center text-gray-400">
           <span>{PLACEHOLDERS.EMPTY_STATE}</span>
         </div>

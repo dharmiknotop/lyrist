@@ -7,5 +7,5 @@ export const typeDefs = `
     }
 
     type Query {
-        getLyrics(name : String!): lyrics,
+        getLyrics(artist: String!, title: String!): lyrics,
     }`;

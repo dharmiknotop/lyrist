@@ -8,6 +8,7 @@ import {
   PLACEHOLDERS,
   BUTTON_LABELS,
   LOADING_MESSAGES,
+  THEME_COLORS,
 } from "@/constants";
 import { Lyrics } from "./Lyrics";
 
@@ -46,9 +47,9 @@ const Form = () => {
   }, [loading]);
 
   const handleSearch = async () => {
-    if (!values.track.trim()) return;
+    if (!values.artist.trim() || !values.track.trim()) return;
 
-    await fetchLyrics(values.track, values.artist);
+    await fetchLyrics(values.artist, values.track);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -59,44 +60,35 @@ const Form = () => {
 
   return (
     <div className="w-full max-w-[90vw] lg:w-[600px]">
-      <div className="relative mt-6 h-11 w-full">
+      <div className="relative mt-6 h-12 w-full">
         <Input
           variant={INPUT_STYLES.VARIANT}
           label={PLACEHOLDERS.ARTIST_LABEL}
-          className={`${INPUT_STYLES.TEXT_COLOR} !border-gray-500 focus:!border-cyan-400`}
           value={values.artist}
+          className="text-white  peer-focus:text-cyan-500 "
           onChange={handleChange("artist")}
           onKeyPress={handleKeyPress}
-          disabled={loading}
-          labelProps={{
-            style: { color: INPUT_STYLES.LABEL_COLOR },
-          }}
+          color={THEME_COLORS.TEXT_PRIMARY}
           crossOrigin="anonymous"
         />
       </div>
 
-      <div className="relative mt-6 flex w-full">
+      <div className="relative mt-6 flex w-full h-12">
         <Input
           variant={INPUT_STYLES.VARIANT}
           label={PLACEHOLDERS.TRACK_LABEL}
-          className={`${INPUT_STYLES.TEXT_COLOR} !border-gray-500 focus:!border-cyan-400`}
-          containerProps={{
-            className: "min-w-0",
-          }}
+          className="text-white"
+          color={THEME_COLORS.TEXT_PRIMARY}
           value={values.track}
           onChange={handleChange("track")}
           onKeyPress={handleKeyPress}
-          disabled={loading}
-          labelProps={{
-            style: { color: INPUT_STYLES.LABEL_COLOR },
-          }}
           crossOrigin="anonymous"
         />
 
         <Button
           size="sm"
-          color={values.track ? "gray" : "blue-gray"}
-          disabled={!values.track || loading}
+          color={values.track && values.artist ? "gray" : "blue-gray"}
+          disabled={!values.track || !values.artist || loading}
           className="!absolute right-1 top-1 rounded shrink-0"
           onClick={handleSearch}
         >
@@ -104,18 +96,13 @@ const Form = () => {
         </Button>
       </div>
 
-      {error && (
-        <div className="mt-4 rounded-md border border-red-500 bg-red-500/10 p-3 text-center text-sm text-red-400">
-          {error}
-        </div>
-      )}
-
       <Lyrics
         loading={loading}
         loadingMessage={loadingMessage}
         lyrics={lyrics?.lyrics || null}
         title={lyrics?.title}
         artist={lyrics?.artist}
+        error={error}
       />
     </div>
   );

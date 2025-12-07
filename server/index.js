@@ -31,8 +31,8 @@ async function startServer() {
       typeDefs,
       resolvers: {
         Query: {
-          getLyrics: (_, { name }) => {
-            return getLyrics(name);
+          getLyrics: (_, args) => {
+            return getLyrics(args);
           },
         },
       },

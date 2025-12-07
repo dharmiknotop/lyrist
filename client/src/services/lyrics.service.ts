@@ -6,13 +6,13 @@ import type { LyricsResponse, GraphQLResponse } from "@/types";
  * LyricsService - Handles all lyrics-related API operations
  */
 class LyricsService {
-  async fetchLyrics(query: string): Promise<LyricsResponse> {
+  async fetchLyrics(artist: string, title: string): Promise<LyricsResponse> {
     try {
       const { data } = await apiClient.post<GraphQLResponse<LyricsResponse>>(
         API_URL,
         {
           query: GET_LYRICS_QUERY,
-          variables: { name: query },
+          variables: { artist, title },
         }
       );
 
@@ -28,17 +28,14 @@ class LyricsService {
 
       return data.data.getLyrics;
     } catch (error: any) {
-      // Re-throw with a more descriptive message
-      throw new Error(
-        error.response?.data?.message ||
-          error.message ||
-          "Failed to fetch lyrics"
-      );
-    }
-  }
+      // Preserve the original error message from the server
+      const errorMessage =
+        error.response?.data?.errors?.[0]?.message ||
+        error.message ||
+        "Failed to fetch lyrics";
 
-  buildSearchQuery(track: string, artist?: string): string {
-    return artist ? `${track} ${artist}`.trim() : track.trim();
+      throw new Error(errorMessage);
+    }
   }
 }
 
