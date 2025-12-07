@@ -12,7 +12,12 @@ export const getLyrics = async ({ artist, title }) => {
     const cachedLyrics = await CacheService.get(name);
 
     if (cachedLyrics) {
-      return { lyrics: cachedLyrics };
+      console.log("Cache hit! Returning cached lyrics");
+      return {
+        lyrics: cachedLyrics,
+        title: title,
+        artist: artist,
+      };
     }
 
     const result = await LyricsService.getLyrics(artist, title);
