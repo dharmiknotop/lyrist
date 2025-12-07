@@ -1,104 +1,122 @@
 "use client";
 
-import axios, { AxiosResponse } from "axios";
 import { Input, Button } from "@material-tailwind/react";
-import { useState } from "react";
-import Lyrics from "./Lyrics";
-
-import { configKeys } from "@/config/keys";
-
-export interface UserRegistrationModel {
-  email: string;
-  password: string;
-  firstname: string;
-  lastname: string;
-}
+import { useLyrics, useForm } from "@/hooks";
+import { useState, useEffect } from "react";
+import {
+  INPUT_STYLES,
+  PLACEHOLDERS,
+  BUTTON_LABELS,
+  LOADING_MESSAGES,
+} from "@/constants";
+import { Lyrics } from "./Lyrics";
 
 const Form = () => {
-  const [loading, setLoading] = useState<boolean>(false);
+  const { values, handleChange } = useForm({
+    track: "",
+    artist: "",
+  });
 
-  const [artist, setArtist] = useState("");
-  const [track, setTrack] = useState("");
+  const { lyrics, loading, error, fetchLyrics } = useLyrics();
 
-  const [lyrics, setLyrics] = useState("");
+  const [loadingMessage, setLoadingMessage] = useState<string>(
+    LOADING_MESSAGES.FETCHING
+  );
 
-  const GET_LYRICS = `query ExampleQuery( $name: String!) {
-        getLyrics(name: $name) {
-          lyrics,
-        }
-        }`;
+  useEffect(() => {
+    if (!loading) {
+      setLoadingMessage(LOADING_MESSAGES.FETCHING);
+      return;
+    }
 
-  const getLyrics = async function (name: String) {
-    try {
-      setLoading(true);
+    setLoadingMessage(LOADING_MESSAGES.FETCHING);
 
-      const { data }: AxiosResponse = await axios.post(
-        `${configKeys.SERVER_URL}/graphql`,
-        {
-          query: GET_LYRICS,
-          variables: { name },
-        }
-      );
+    const timer1 = setTimeout(() => {
+      setLoadingMessage(LOADING_MESSAGES.SCRAPING);
+    }, 3000);
 
-      console.log(data);
+    const timer2 = setTimeout(() => {
+      setLoadingMessage(LOADING_MESSAGES.ALMOST_THERE);
+    }, 8000);
 
-      setLyrics(data?.data?.getLyrics?.lyrics);
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, [loading]);
 
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
+  const handleSearch = async () => {
+    if (!values.track.trim()) return;
+
+    await fetchLyrics(values.track, values.artist);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && !loading) {
+      handleSearch();
     }
   };
 
   return (
-    <div className="max-w-[90vw] lg:w-[600px]">
-      <div className="relative h-11 w-full mt-6">
+    <div className="w-full max-w-[90vw] lg:w-[600px]">
+      <div className="relative mt-6 h-11 w-full">
         <Input
-          variant="outlined"
-          label="Artist name (optional)"
-          color="cyan"
-          className="text-white"
-          value={artist}
+          variant={INPUT_STYLES.VARIANT}
+          label={PLACEHOLDERS.ARTIST_LABEL}
+          className={`${INPUT_STYLES.TEXT_COLOR} !border-gray-500 focus:!border-cyan-400`}
+          value={values.artist}
+          onChange={handleChange("artist")}
+          onKeyPress={handleKeyPress}
+          disabled={loading}
           labelProps={{
-            style: { color: "cyan" },
-          }}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setArtist(e.target.value);
+            style: { color: INPUT_STYLES.LABEL_COLOR },
           }}
           crossOrigin="anonymous"
         />
       </div>
-      <div className="relative flex w-full mt-6">
+
+      <div className="relative mt-6 flex w-full">
         <Input
-          variant="outlined"
-          label="Track name"
-          color="cyan"
-          className="text-white pr-20"
-          value={track}
-          labelProps={{
-            style: { color: "cyan" },
+          variant={INPUT_STYLES.VARIANT}
+          label={PLACEHOLDERS.TRACK_LABEL}
+          className={`${INPUT_STYLES.TEXT_COLOR} !border-gray-500 focus:!border-cyan-400`}
+          containerProps={{
+            className: "min-w-0",
           }}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setTrack(e.target.value);
+          value={values.track}
+          onChange={handleChange("track")}
+          onKeyPress={handleKeyPress}
+          disabled={loading}
+          labelProps={{
+            style: { color: INPUT_STYLES.LABEL_COLOR },
           }}
           crossOrigin="anonymous"
         />
 
         <Button
           size="sm"
-          color={track ? "gray" : "blue-gray"}
-          disabled={!track}
-          className="!absolute right-1 top-1 rounded"
-          onClick={() => {
-            getLyrics(`${track} ${artist}`);
-          }}
+          color={values.track ? "gray" : "blue-gray"}
+          disabled={!values.track || loading}
+          className="!absolute right-1 top-1 rounded shrink-0"
+          onClick={handleSearch}
         >
-          Search
+          {loading ? BUTTON_LABELS.SEARCHING : BUTTON_LABELS.SEARCH}
         </Button>
       </div>
 
-      <Lyrics Loading={loading} lyrics={lyrics} />
+      {error && (
+        <div className="mt-4 rounded-md border border-red-500 bg-red-500/10 p-3 text-center text-sm text-red-400">
+          {error}
+        </div>
+      )}
+
+      <Lyrics
+        loading={loading}
+        loadingMessage={loadingMessage}
+        lyrics={lyrics?.lyrics || null}
+        title={lyrics?.title}
+        artist={lyrics?.artist}
+      />
     </div>
   );
 };

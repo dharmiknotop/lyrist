@@ -3,19 +3,19 @@ import CacheService from "../services/CacheService.js";
 
 export const getLyrics = async (name) => {
   try {
-    const cachedLyrics = await CacheService.get(name);
+    // const cachedLyrics = await CacheService.get(name);
 
-    if (cachedLyrics) {
-      return { lyrics: cachedLyrics };
-    }
+    // if (cachedLyrics) {
+    //   return { lyrics: cachedLyrics };
+    // }
 
     console.log(`Fetching lyrics from Genius API for: "${name}"`);
 
     const result = await GeniusService.getLyrics(name);
 
-    if (result.lyrics) {
-      await CacheService.set(name, result.lyrics);
-    }
+    // if (result.lyrics) {
+    //   await CacheService.set(name, result.lyrics);
+    // }
 
     return result;
   } catch (error) {

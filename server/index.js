@@ -1,6 +1,8 @@
 import * as dotenv from "dotenv";
 
-dotenv.config({ path: "config/.env" });
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config({ path: "config/.env" });
+}
 
 import express from "express";
 import { ApolloServer } from "@apollo/server";
@@ -19,6 +21,12 @@ async function startServer() {
     app.use(cors());
     app.use(bodyParser.json());
 
+    // Request logging middleware
+    app.use((req, res, next) => {
+      console.log(`📥 ${req.method} ${req.path}`);
+      next();
+    });
+
     const apolloServer = new ApolloServer({
       typeDefs,
       resolvers: {
@@ -33,10 +41,9 @@ async function startServer() {
 
     app.use("/graphql", expressMiddleware(apolloServer));
 
-    const server = app.listen(8000, () => {
-      console.log(
-        `🚀 Server ready at http://localhost:8000${apolloServer.graphqlPath}`
-      );
+    const PORT = process.env.PORT || 8000;
+    const server = app.listen(PORT, () => {
+      console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);
     });
     return server;
   } catch (error) {

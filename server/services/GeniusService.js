@@ -1,11 +1,18 @@
 import { Client } from "genius-lyrics";
+import axios from "axios";
+import * as cheerio from "cheerio";
 import * as dotenv from "dotenv";
 
-dotenv.config({ path: "config/.env" });
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config({ path: "config/.env" });
+}
 
 class GeniusService {
   constructor() {
     const token = process.env.GENIUS_API_TOKEN;
+
+    console.log("GeniusService: Initializing Genius API client...");
+    console.log(token);
 
     if (token) {
       console.log(
@@ -21,40 +28,60 @@ class GeniusService {
   }
 
   async getLyrics(query) {
-    let lastError;
+    console.log(`Fetching lyrics from Genius API for: "${query}"`);
+    console.log(`Using token: ${process.env.GENIUS_API_TOKEN ? "YES" : "NO"}`);
 
-    // Try genius-lyrics library (3 attempts)
-    for (let attempt = 1; attempt <= 3; attempt++) {
-      try {
-        console.log(`Attempt ${attempt}: Using genius-lyrics library...`);
-        const results = await this.client.songs.search(query);
+    console.log(`Searching for "${query}"...`);
+    const results = await this.client.songs.search(query);
 
-        if (!results || results.length === 0) {
-          throw new Error("No song found for the given query");
-        }
+    console.log(`Search returned ${results?.length || 0} results`);
 
-        const song = results[0];
-        const lyrics = await song.lyrics();
-
-        return {
-          lyrics,
-          title: song.title,
-          artist: song.artist?.name || "Unknown Artist",
-        };
-      } catch (error) {
-        lastError = error;
-        console.error(`Attempt ${attempt} failed:`, error.message);
-
-        if (attempt < 3) {
-          const delay = 2000 * attempt;
-          console.log(`Retrying in ${delay}ms...`);
-          await new Promise((resolve) => setTimeout(resolve, delay));
-        }
-      }
+    if (!results || results.length === 0) {
+      throw new Error("No song found for the given query");
     }
 
-    console.error("All attempts failed:", lastError.message);
-    throw new Error(lastError.message || "Failed to fetch lyrics");
+    const song = results[0];
+    console.log(`Found song: "${song.title}" by ${song.artist?.name}`);
+    console.log(`Song URL: ${song.url}`);
+
+    // Fetch lyrics by scraping the Genius page
+    const page = await axios.get(song.url, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
+          "(KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+        Accept:
+          "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+      },
+      timeout: 15000,
+    });
+
+    const $ = cheerio.load(page.data);
+
+    let lyrics = "";
+    $('div[data-lyrics-container="true"]').each((_, elem) => {
+      if ($(elem).text().length !== 0) {
+        const snippet = $(elem)
+          .html()
+          .replace(/<br>/g, "\n")
+          .replace(/<(?!\s*br\s*\/?)[^>]+>/gi, "");
+        lyrics += $("<textarea/>").html(snippet).text().trim() + "\n\n";
+      }
+    });
+
+    lyrics = lyrics.trim();
+
+    if (!lyrics) {
+      throw new Error("Could not parse lyrics from Genius page");
+    }
+
+    console.log(`Successfully fetched lyrics (${lyrics.length} chars)`);
+
+    return {
+      lyrics,
+      title: song.title,
+      artist: song.artist?.name || "Unknown Artist",
+    };
   }
 }
 
